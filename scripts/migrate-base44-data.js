@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 const REQUIRED_ENTITIES = [
   'customers',
@@ -90,7 +90,8 @@ if (missingEntities.length > 0 || invalidEntities.length > 0) {
       'Re-export/eject the Salon Management Base44 project from the original Base44 account/project.',
       'Place the real exported entity JSON files in BASE44_EXPORT_DIR without creating empty placeholders or mock data.',
       'Required files are: customers.json, staff.json, services.json, appointments.json, sales.json, payments.json, expenses.json, and products.json.',
-      'Commit the unmodified recovered Base44 export before running database migration again.',
+      'Do not create empty JSON files or mock data.',
+      'Commit the recovered Base44 export before running database migration again.',
     ],
   };
 

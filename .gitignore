@@ -5,3 +5,5 @@ migration-output/
 .DS_Store
 .env
 *.log
+*.exe
+*.7z
