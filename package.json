@@ -1,0 +1,41 @@
+{
+  "name": "salon-management",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Salon Management desktop migration shell for Windows.",
+  "author": "Salon Management",
+  "main": "electron/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron:dev": "concurrently -k \"npm run dev -- --host 127.0.0.1\" \"wait-on tcp:5173 && cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:5173 electron .\"",
+    "electron:build": "npm run build && electron-builder --win nsis",
+    "electron:pack": "npm run build && electron-builder --win dir"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "lucide-react": "latest"
+  },
+  "devDependencies": {
+    "concurrently": "latest",
+    "cross-env": "latest",
+    "electron": "latest",
+    "electron-builder": "latest",
+    "wait-on": "latest"
+  },
+  "build": {
+    "appId": "com.salonmanagement.desktop",
+    "productName": "Salon Management",
+    "artifactName": "${productName} Setup.${ext}",
+    "directories": { "output": "release" },
+    "files": ["dist/**/*", "electron/**/*", "package.json"],
+    "extraMetadata": { "main": "electron/main.js" },
+    "win": { "target": [{ "target": "nsis", "arch": ["x64"] }], "executableName": "SalonManagement" },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true, "createStartMenuShortcut": true, "shortcutName": "Salon Management" }
+  }
+}
