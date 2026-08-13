@@ -14,7 +14,9 @@ const REQUIRED_ENTITIES = [
   'products',
 ];
 
-const exportDir = path.resolve(process.env.BASE44_EXPORT_DIR || './base44-export');
+const exportDir = path.resolve(
+  process.env.BASE44_EXPORT_DIR || './base44-export'
+);
 
 function listFilesRecursive(dir) {
   if (!fs.existsSync(dir)) {
@@ -59,6 +61,7 @@ for (const entity of REQUIRED_ENTITIES) {
 
   try {
     const data = readJsonFile(filePath);
+
     existingEntities[entity] = {
       file: path.relative(process.cwd(), filePath),
       records: Array.isArray(data) ? data.length : null,
@@ -66,7 +69,11 @@ for (const entity of REQUIRED_ENTITIES) {
       topLevelType: Array.isArray(data) ? 'array' : typeof data,
     };
   } catch (error) {
-    invalidEntities.push({ entity, file: path.relative(process.cwd(), filePath), error: error.message });
+    invalidEntities.push({
+      entity,
+      file: path.relative(process.cwd(), filePath),
+      error: error.message,
+    });
   }
 }
 
